@@ -1,59 +1,4 @@
-// // controller.js
-// const User = require('./model');
 
-
-// exports.createUser = async (req, res) => {
-//     try {
-//         const newUser = new User(req.body);
-//         const savedUser = await newUser.save();
-//         res.json({ message: 'Create Successfully' });
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
-
-// // Read
-// exports.getAllUsers = async (req, res) => {
-//     try {
-//         const users = await User.find();
-//         res.json({ users, message: 'Get all successfully' });
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
-
-// exports.getUserById = async (req, res) => {
-//     try {
-//         const user = await User.findById(req.params.id);
-//         res.json(user);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
-
-// // Update
-// exports.updateUser = async (req, res) => {
-//     try {
-//         const updatedUser = await User.findByIdAndUpdate(
-//             req.params.id,
-//             req.body,
-//             { new: true }
-//         );
-//         res.json(updatedUser);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
-
-// // Delete
-// exports.deleteUser = async (req, res) => {
-//     try {
-//         const deletedUser = await User.findByIdAndDelete(req.params.id);
-//         res.json({ message: 'Deleted successfully' });
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
 const { validationResult } = require('express-validator');
 const User = require('./models');
 
@@ -111,19 +56,7 @@ exports.updateUser = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-// exports.updateUser = async (req, res) => {
-//     try {
-//         const updatedUser = await User.findByIdAndUpdate(
-//             req.body,
-//             { new: true }
-//         );
-//         res.json(updatedUser);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
 
-// Delete
 exports.deleteUser = async (req, res) => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.id);
@@ -137,15 +70,3 @@ exports.deleteUser = async (req, res) => {
 };
 
 
-// Example of using express-validator for createUser
-const { body } = require('express-validator');
-
-exports.validateUserCreation = [
-    body('name').trim().notEmpty().withMessage('Name is required'),
-    body('age').isInt().withMessage('Age must be a number'),
-    body('email').isEmail().withMessage('Invalid email address'),
-    body('phoneNo').isMobilePhone().withMessage('Invalid phone number'),
-    body('gender').isIn(['male', 'female', 'others']).withMessage('Invalid gender'),
-    body('qualification').trim().notEmpty().withMessage('Qualification is required'),
-    validateUserData,
-];
